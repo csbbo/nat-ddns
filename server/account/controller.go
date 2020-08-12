@@ -58,7 +58,7 @@ func regist(c *gin.Context) {
 
 	count, _ := collection.CountDocuments(context.Background(), bson.M{"username": form.Username})
 	if count != 0 {
-		common.ResponseError(c, "用户名已存在")
+		common.ResponseError(c, "用户已存在")
 		return
 	}
 
@@ -67,8 +67,17 @@ func regist(c *gin.Context) {
 	common.ResponseSuccess(c, map[string]interface{}{"id": res.InsertedID})
 }
 
+func checkAuth(c *gin.Context) {
+	if err := common.Check(c, nil, true); err != nil {
+		common.ResponseError(c, err)
+		return
+	}
+	common.ResponseSuccess(c, nil)
+}
+
 func Setup(r *gin.Engine) {
-	r.POST("/login", login)
-	r.POST("/logout", logout)
-	r.POST("/regist", regist)
+	r.POST("/api/login", login)
+	r.POST("/api/logout", logout)
+	r.POST("/api/regist", regist)
+	r.GET("/api/checkAuth", checkAuth)
 }

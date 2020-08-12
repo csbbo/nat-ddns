@@ -98,7 +98,7 @@ func frpList(c *gin.Context) {
 }
 
 func Setup(r *gin.Engine) {
-	r.POST("/frp/create", frpCreate)
-	r.DELETE("/frp/delete", frpDelete)
-	r.GET("/frp/list", frpList)
+	r.POST("/api/frp/create", frpCreate)
+	r.DELETE("/api/frp/delete", frpDelete)
+	r.GET("/api/frp/list", frpList)
 }

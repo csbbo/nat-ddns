@@ -6,6 +6,7 @@ import router from './router'
 
 Vue.config.productionTip = false
 Vue.use(ElementUI);
+import './style/index.css' //全局样式
 
 new Vue({
   router,
